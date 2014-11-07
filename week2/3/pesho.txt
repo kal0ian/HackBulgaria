@@ -1,0 +1,1 @@
+{"name": "PlaylistTitle", "songs": [{"album": "Album1", "rating": 2, "artist": "Artist1", "title": "Title1", "length": 192, "bitrate": 128}, {"album": "Album2", "rating": 2, "artist": "Artist2", "title": "Title2", "length": 183, "bitrate": 1024}]}
