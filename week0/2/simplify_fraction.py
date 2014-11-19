@@ -9,4 +9,4 @@ def simplify_fraction(fraction):
     fract = (fraction[0] / a, fraction[1] / a)
     return fract
 
-#print (simplify_fraction((2, 6)))
+#print (simplify_fraction((0, 0)))

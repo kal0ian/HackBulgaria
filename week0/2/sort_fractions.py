@@ -1,10 +1,12 @@
 from simplify_fraction import simplify_fraction
 
+def evaluate_fraction(fraction):
+	return float(fraction[0]) / fraction[1]
+
 
 def sort_fractions(fractions):
-    sorted_fractions = []
-    for i in fractions:
-        sorted_fractions.append(simplify_fraction(i))
-    sorted_fractions.sort()
-    return sorted_fractions
-print (sort_fractions([(2, 3), (1, 2), (1, 3)]))
+	return(sorted(fractions, key=evaluate_fraction))
+
+
+#print (sort_fractions([(2, 3), (1, 2), (1, 3)]))
+#stoqn e geniiii

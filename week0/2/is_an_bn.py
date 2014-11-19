@@ -17,4 +17,4 @@ def is_an_bn(word):
     if count != 0:
         return False
     return True
-print (is_an_bn("psabb"))
+print (is_an_bn("aabb"))

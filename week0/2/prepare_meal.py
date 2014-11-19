@@ -10,4 +10,4 @@ def prepare_meal(x):
             egg = egg + 'and eggs'
             x /= 5
     return egg
-print(prepare_meal(15))
+#print(prepare_meal(27))

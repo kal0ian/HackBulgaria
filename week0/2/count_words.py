@@ -1,6 +1,3 @@
-
-
-
 def count_words(arr):
     dictionary = {}
     for item in arr:
@@ -9,4 +6,4 @@ def count_words(arr):
         else:
             dictionary[item] = dictionary[item] + 1
     return dictionary
-print (count_words(["python", "python", "python", "ruby"]))
+#print (count_words(["python", "python"]))

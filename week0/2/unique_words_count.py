@@ -6,4 +6,4 @@ def unique_words_count(arr):
             dictionary[item] = 1
             count += 1
     return count
-print (unique_words_count(["apple", "banana", "apple", "pie"]))
+#print (unique_words_count(["apple", "banana", "apple", "pie"]))

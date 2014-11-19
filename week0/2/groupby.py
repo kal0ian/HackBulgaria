@@ -9,4 +9,4 @@ def groupby(func, seq):
         else:
             result[key] = [item]
     return result
-print (groupby(lambda x: x % 2, [0,1,2,3,4,5,6,7]))
+#print (groupby(lambda x: x % 2, [0,1,2,3,4,5,6,7]))
