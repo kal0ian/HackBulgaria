@@ -15,6 +15,7 @@ class TicTacToe(object):
         self.playerSymbol = ""
         self.artificialIntelligenceSymbol = ""
         self.choosed_boxes = []
+        self.is_difficult = False
 
     def set_player_name(self):
         self.playerName = input("Enter player name: ")
@@ -27,6 +28,15 @@ class TicTacToe(object):
             self.artificialIntelligenceSymbol = 'x'
         else:
             self.artificialIntelligenceSymbol = 'o'
+
+    def set_is_difficult(self):
+        difficult = input("Choose difficult - easy or hard: ")
+        while (difficult != "hard" and difficult != "easy"):
+            difficult = input("Choose difficult - easy or hard: ")
+        if difficult == "hard":
+            self.is_difficult = True
+        elif difficult == "easy":
+            self.is_difficult = False
 
     def clear_screen(self):
         os.system('cls' if os.name == 'nt' else 'clear')
@@ -85,6 +95,26 @@ class TicTacToe(object):
             list, symbol, tempi, tempj)
         return winner
 
+    def player(self):
+        isGoodNumber = False
+        while not isGoodNumber:
+            number = input(
+                self.playerName + " enter number you are with " + self.playerSymbol + ": ")
+            number = int(number)
+            if(number > 0 and number < 10 and number not in self.choosed_boxes):
+                isGoodNumber = True
+        self.choosed_boxes.append(number)
+        winner = self.imput_symbol(
+            self.list,  number, self.playerSymbol)
+        return winner
+
+    def choose_random_number(self):
+        number = random.randint(1, 9)
+        while number in self.choosed_boxes:
+            number = random.randint(1, 9)
+        self.choosed_boxes.append(number)
+        return number
+
     def play(self):
         self.set_player_symbol()
         winner = False
@@ -96,15 +126,17 @@ class TicTacToe(object):
                     break
                 self.clear_screen()
                 self.table()
-                if self.simulatorAIWin():
-                    winner = True
-                if self.simulatorAIBlock():
-                    pass
+                if self.is_difficult:
+                    if self.AISimulator(self.artificialIntelligenceSymbol):
+                        winner = True
+                    if self.AISimulator(self.playerSymbol):
+                        pass
+                    else:
+                        number = self.choose_random_number()
+                        winner = self.imput_symbol(self.list,
+                                                   number, self.artificialIntelligenceSymbol)
                 else:
-                    number = random.randint(1, 9)
-                    while number in self.choosed_boxes:
-                        number = random.randint(1, 9)
-                    self.choosed_boxes.append(number)
+                    number = self.choose_random_number()
                     winner = self.imput_symbol(self.list,
                                                number, self.artificialIntelligenceSymbol)
                 turn = False
@@ -114,16 +146,7 @@ class TicTacToe(object):
                     break
                 self.clear_screen()
                 self.table()
-                isGoodNumber = False
-                while not isGoodNumber:
-                    number = input(
-                        self.playerName + " enter number you are with " + self.playerSymbol + ": ")
-                    number = int(number)
-                    if(number > 0 and number < 10 and number not in self.choosed_boxes):
-                        isGoodNumber = True
-                self.choosed_boxes.append(number)
-                winner = self.imput_symbol(
-                    self.list,  number, self.playerSymbol)
+                winner = self.player()
                 turn = True
             if winner:
                 self.clear_screen()
@@ -149,31 +172,15 @@ class TicTacToe(object):
         self.list = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
         self.choosed_boxes = []
 
-    def simulatorAIWin(self):
+    def AISimulator(self, symbol):
         simulateTable = deepcopy(self.list)
         for i in range(1, 10):
             if i not in self.choosed_boxes:
-                if self.imput_symbol(simulateTable, i, self.artificialIntelligenceSymbol):
+                if self.imput_symbol(simulateTable, i, symbol):
                     self.imput_symbol(
                         self.list, i, self.artificialIntelligenceSymbol)
                     self.choosed_boxes.append(i)
                     return True
-            print(simulateTable)
-            print(self.list)
-            simulateTable = deepcopy(self.list)
-        return False
-
-    def simulatorAIBlock(self):
-        simulateTable = deepcopy(self.list)
-        for i in range(1, 10):
-            if i not in self.choosed_boxes:
-                if self.imput_symbol(simulateTable, i, self.playerSymbol):
-                    self.imput_symbol(
-                        self.list, i, self.artificialIntelligenceSymbol)
-                    self.choosed_boxes.append(i)
-                    return True
-            print(simulateTable)
-            print(self.list)
             simulateTable = deepcopy(self.list)
         return False
 
@@ -182,6 +189,7 @@ def main():
 
     game = TicTacToe()
     game.set_player_name()
+    game.set_is_difficult()
     game.play()
     retry = input("Do you want to play again y/n: ")
     while retry == 'y':
